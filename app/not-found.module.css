@@ -1,0 +1,37 @@
+.container {
+  display: block;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.description {
+  font-size: 20px;
+}
+
+.btn {
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  padding: 8px 24px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: underline;
+  color: #084298;
+  background-color: #e8f4fd;
+  border: none;
+  border-radius: 4px;
+  transition: text-decoration 0.2s ease, background-color 0.2s ease,
+    scale 0.2s ease, font-weight 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #b6d4fe;
+  text-decoration: none;
+  scale: 1.01;
+  font-weight: 600;
+}

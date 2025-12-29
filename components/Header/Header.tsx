@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import css from "./Header.module.css";
 
 export default function Header() {
@@ -21,6 +22,7 @@ export default function Header() {
           <li>
             <Link href="/notes/filter/all">Notes</Link>
           </li>
+          <AuthNavigation isAuthorized={false} userEmail="" />
         </ul>
       </nav>
     </header>

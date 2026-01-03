@@ -3,7 +3,7 @@
 import css from "./SignUpPage.module.css";
 
 export default function SignUpPageClient() {
-  const handleSubmit = () => {};
+  const handleSubmit = async (formData: FormData) => {};
 
   return (
     <main className={css.mainContent}>

@@ -14,7 +14,6 @@ export default function AuthNavigation({
     <>
       {isAuthorized && (
         <>
-          {" "}
           <li className={css.navigationItem}>
             <Link
               href="/profile"

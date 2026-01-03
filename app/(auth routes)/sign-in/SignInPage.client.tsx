@@ -1,9 +1,32 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { login, LoginRequest } from "@/lib/api/clientApi";
 import css from "./SignInPage.module.css";
 
 export default function SignInPageClient() {
-  const handleSubmit = async (formData: FormData) => {};
+  const router = useRouter();
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (formData: FormData) => {
+    try {
+      const formValues = Object.fromEntries(
+        formData
+      ) as unknown as LoginRequest;
+
+      const res = await login(formValues);
+
+      if (res) {
+        router.push("/profile");
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
+      setError((error as Error).message ?? "Oops... some error");
+    }
+  };
+
   return (
     <main className={css.mainContent}>
       <form className={css.form} action={handleSubmit}>
@@ -37,7 +60,7 @@ export default function SignInPageClient() {
           </button>
         </div>
 
-        <p className={css.error}>error</p>
+        {error !== "" && <p className={css.error}>{error}</p>}
       </form>
     </main>
   );

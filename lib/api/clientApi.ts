@@ -15,7 +15,7 @@ interface NotesParams {
   sortBy?: "created" | "updated";
 }
 
-interface RegisterRequest {
+export interface RegisterRequest {
   email: string;
   password: string;
 }

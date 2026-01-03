@@ -11,6 +11,8 @@ export default function SignInPageClient() {
 
   const handleSubmit = async (formData: FormData) => {
     try {
+      setError("");
+
       const formValues = Object.fromEntries(
         formData
       ) as unknown as LoginRequest;

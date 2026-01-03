@@ -11,6 +11,8 @@ export default function SignUpPageClient() {
 
   const handleSubmit = async (formData: FormData) => {
     try {
+      setError("");
+
       const formValues = Object.fromEntries(
         formData
       ) as unknown as RegisterRequest;

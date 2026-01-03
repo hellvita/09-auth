@@ -25,6 +25,10 @@ export interface LoginRequest {
   password: string;
 }
 
+interface CheckSessionRequest {
+  success: boolean;
+}
+
 export const register = async (userData: RegisterRequest) => {
   const { data } = await nextServer.post<User>("/auth/register", userData);
   return data;
@@ -33,6 +37,11 @@ export const register = async (userData: RegisterRequest) => {
 export const login = async (userData: LoginRequest) => {
   const { data } = await nextServer.post<User>("/auth/login", userData);
   return data;
+};
+
+export const checkSession = async () => {
+  const { data } = await nextServer.get<CheckSessionRequest>("/auth/session");
+  return data.success;
 };
 
 export const fetchNotes = async ({

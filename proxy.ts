@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { parse } from "cookie";
+import { checkSession } from "./lib/api/serverApi";
 
 const privateRoutes = ["/profile"];
 
@@ -17,6 +19,33 @@ export async function proxy(request: NextRequest) {
   if (isPrivateRoute) {
     if (!accessToken) {
       if (refreshToken) {
+        const data = await checkSession();
+        const setCookie = data.headers["set-cookie"];
+
+        if (setCookie) {
+          const cookieArray = Array.isArray(setCookie)
+            ? setCookie
+            : [setCookie];
+
+          for (const cookieStr of cookieArray) {
+            const parsed = parse(cookieStr);
+
+            const options = {
+              expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
+              path: parsed.Path,
+              maxAge: Number(parsed["Max-Age"]),
+            };
+
+            if (parsed.accessToken)
+              cookieStore.set("accessToken", parsed.accessToken, options);
+            if (parsed.refreshToken)
+              cookieStore.set("refreshToken", parsed.refreshToken, options);
+          }
+
+          return NextResponse.next({
+            headers: { Cookie: cookieStore.toString() },
+          });
+        }
       }
 
       return NextResponse.redirect(new URL("/sign-in", request.url));
@@ -26,4 +55,6 @@ export async function proxy(request: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = {};
+export const config = {
+  matcher: ["/profile"],
+};

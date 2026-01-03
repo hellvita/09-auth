@@ -22,7 +22,7 @@ export default function Header() {
           <li>
             <Link href="/notes/filter/all">Notes</Link>
           </li>
-          <AuthNavigation isAuthorized={false} userEmail="" />
+          <AuthNavigation isAuthorized={true} userEmail="" />
         </ul>
       </nav>
     </header>

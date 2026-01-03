@@ -20,8 +20,18 @@ export interface RegisterRequest {
   password: string;
 }
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
 export const register = async (userData: RegisterRequest) => {
   const { data } = await nextServer.post<User>("/auth/register", userData);
+  return data;
+};
+
+export const login = async (userData: LoginRequest) => {
+  const { data } = await nextServer.post<User>("/auth/login", userData);
   return data;
 };
 

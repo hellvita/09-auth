@@ -21,13 +21,13 @@ export default function ProfilePage() {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          <Image
+          {/* <Image
             src="Avatar"
             alt="User Avatar"
             width={120}
             height={120}
             className={css.avatar}
-          />
+          /> */}
         </div>
         <div className={css.profileInfo}>
           <p>Username: your_username</p>

@@ -1,16 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getMe } from "@/lib/api/serverApi";
 import css from "./ProfilePage.module.css";
 
 // ?? TO-DO: meta
 
-// interface ProfilePageProps {
-//   username: string;
-//   userEmail: string;
-// }
-// { username, userEmail }: ProfilePageProps
+export default async function ProfilePage() {
+  const user = await getMe();
 
-export default function ProfilePage() {
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -21,17 +18,17 @@ export default function ProfilePage() {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          {/* <Image
-            src="Avatar"
+          <Image
+            src={user.avatar}
             alt="User Avatar"
             width={120}
             height={120}
             className={css.avatar}
-          /> */}
+          />
         </div>
         <div className={css.profileInfo}>
-          <p>Username: your_username</p>
-          <p>Email: your_email@example.com</p>
+          <p>Username: {user.username}</p>
+          <p>Email: {user.email}</p>
         </div>
       </div>
     </main>

@@ -39,6 +39,10 @@ export const login = async (userData: LoginRequest) => {
   return data;
 };
 
+export const logout = async (): Promise<void> => {
+  await nextServer.post("/auth/logout");
+};
+
 export const checkSession = async () => {
   const { data } = await nextServer.get<CheckSessionRequest>("/auth/session");
   return data.success;

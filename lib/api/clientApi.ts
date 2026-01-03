@@ -44,6 +44,11 @@ export const checkSession = async () => {
   return data.success;
 };
 
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>("/users/me");
+  return data;
+};
+
 export const fetchNotes = async ({
   search,
   page,

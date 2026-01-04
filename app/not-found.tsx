@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import css from "./not-found.module.css";
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export const metadata: Metadata = {
   title: "Page not found",
   description: "Unfortunately, the page at this address does not exist!",
@@ -11,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Page not found",
     description: "Unfortunately, the page at this address does not exist!",
-    url: "https://08-zustand-omega-beige.vercel.app/404",
+    url: `${baseURL}/404`,
     images: [
       {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

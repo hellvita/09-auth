@@ -20,13 +20,15 @@ export async function generateMetadata({
   const titleStr = note.title;
   const descriptionStr = note.content === "" ? titleStr : note.content;
 
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
   return {
     title: titleStr,
     description: descriptionStr.slice(0, 30),
     openGraph: {
       title: titleStr,
       description: descriptionStr.slice(0, 100),
-      url: `https://08-zustand-omega-beige.vercel.app/notes/${id}`,
+      url: `${baseURL}/notes/${id}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

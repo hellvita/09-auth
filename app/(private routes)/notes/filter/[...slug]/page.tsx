@@ -23,13 +23,15 @@ export async function generateMetadata({
     tag === "all" ? "List of the all notes" : "List of notes with tag " + tag
   }`;
 
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
   return {
     title: titleStr,
     description: descriptionStr,
     openGraph: {
       title: titleStr,
       description: descriptionStr,
-      url: `https://08-zustand-omega-beige.vercel.app/notes/filter/${tag}`,
+      url: `${baseURL}/notes/filter/${tag}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

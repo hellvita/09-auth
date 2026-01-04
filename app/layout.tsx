@@ -13,6 +13,8 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export const metadata: Metadata = {
   title: "NoteHub",
   description: "A web-application to keep your notes that is simple to use.",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     title: "NoteHub",
     description:
       "Keep your notes organized with smart tagging. Create todos, work notes, and more. Search instantly, filter by category, sync everywhere you go.",
-    url: "https://08-zustand-omega-beige.vercel.app/",
+    url: baseURL,
     images: [
       {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

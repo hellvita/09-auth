@@ -1,9 +1,34 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getMe } from "@/lib/api/serverApi";
 import css from "./ProfilePage.module.css";
 
-// ?? TO-DO: meta
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await getMe();
+
+  const titleStr = user.username;
+  const descriptionStr = `${user.username}'s profile page. View your email, avatar, and update your username. Manage your account identity on NoteHub.`;
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+  return {
+    title: titleStr,
+    description: descriptionStr.slice(0, 60),
+    openGraph: {
+      title: titleStr,
+      description: descriptionStr,
+      url: `${baseURL}/profile`,
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${user.username}'s profile page`,
+        },
+      ],
+    },
+  };
+}
 
 export default async function ProfilePage() {
   const user = await getMe();

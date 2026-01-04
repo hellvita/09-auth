@@ -29,6 +29,10 @@ interface CheckSessionRequest {
   success: boolean;
 }
 
+export interface UpdateRequest {
+  username: string;
+}
+
 export const register = async (userData: RegisterRequest) => {
   const { data } = await nextServer.post<User>("/auth/register", userData);
   return data;
@@ -41,6 +45,11 @@ export const login = async (userData: LoginRequest) => {
 
 export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
+};
+
+export const update = async (userData: UpdateRequest) => {
+  const { data } = await nextServer.patch<User>("/users/me", userData);
+  return data;
 };
 
 export const checkSession = async () => {

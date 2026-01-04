@@ -1,14 +1,17 @@
 "use client";
 
 import { useAuthStore } from "@/lib/store/authStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { checkSession, getMe } from "@/lib/api/clientApi";
+import Loading from "@/app/loading";
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 export default function AuthProvider({ children }: AuthProviderProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const setUser = useAuthStore((state) => state.setUser);
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated
@@ -16,6 +19,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const fetchUser = async () => {
+      setIsLoading(true);
       const isAuthenticated = await checkSession();
 
       if (isAuthenticated) {
@@ -24,9 +28,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       } else {
         clearIsAuthenticated();
       }
+
+      setIsLoading(false);
     };
     fetchUser();
   }, [setUser, clearIsAuthenticated]);
 
-  return children;
+  return isLoading ? <Loading /> : children;
 }

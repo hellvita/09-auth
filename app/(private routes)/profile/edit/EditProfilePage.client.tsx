@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateMe } from "@/lib/api/clientApi";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import css from "./EditProfilePage.module.css";
 
 interface EditProfilePageProps {
@@ -27,7 +28,11 @@ export default function EditProfilePageClient({
     event.preventDefault();
     const res = await updateMe({ email, username: userName });
 
-    if (res) router.push("/profile");
+    if (res) {
+      router.push("/profile");
+    } else {
+      toast("Could not update profile, please try again...");
+    }
   };
 
   const handleCancel = () => router.push("/profile");

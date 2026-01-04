@@ -39,6 +39,7 @@
 }
 
 .toast {
+  text-align: center;
   border: 1px solid #0a66c2;
   padding: 4px 8px;
   font-size: 20px;

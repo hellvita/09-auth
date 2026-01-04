@@ -44,6 +44,10 @@
   align-items: flex-start;
 }
 
+.profileInfo p {
+  margin: 8px 0;
+}
+
 .usernameWrapper {
   width: 100%;
   display: flex;

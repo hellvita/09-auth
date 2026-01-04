@@ -1,7 +1,12 @@
 import { cookies } from "next/headers";
+import { AxiosResponse } from "axios";
 import { nextServer } from "./api";
 import { Note, NoteTag } from "@/types/note";
 import { User } from "@/types/user";
+
+interface CheckSessionRequest {
+  success: boolean;
+}
 
 interface NotesHttpResponse {
   notes: Note[];
@@ -16,10 +21,12 @@ interface NotesParams {
   sortBy?: "created" | "updated";
 }
 
-export const checkSession = async () => {
+export const checkSession = async (): Promise<
+  AxiosResponse<CheckSessionRequest>
+> => {
   const cookieStore = await cookies();
 
-  const res = await nextServer.get("/auth/session", {
+  const res = await nextServer.get<CheckSessionRequest>("/auth/session", {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -31,7 +38,7 @@ export const checkSession = async () => {
 export const getMe = async (): Promise<User> => {
   const cookieStore = await cookies();
 
-  const { data } = await nextServer.get("/users/me", {
+  const { data } = await nextServer.get<User>("/users/me", {
     headers: {
       Cookie: cookieStore.toString(),
     },

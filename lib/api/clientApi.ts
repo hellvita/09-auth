@@ -34,13 +34,13 @@ export interface UpdateRequest {
   username: string;
 }
 
-export const register = async (userData: RegisterRequest) => {
+export const register = async (userData: RegisterRequest): Promise<User> => {
   const { data } = await nextServer.post<User>("/auth/register", userData);
 
   return data;
 };
 
-export const login = async (userData: LoginRequest) => {
+export const login = async (userData: LoginRequest): Promise<User> => {
   const { data } = await nextServer.post<User>("/auth/login", userData);
 
   return data;
@@ -50,19 +50,19 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
-export const updateMe = async (userData: UpdateRequest) => {
+export const updateMe = async (userData: UpdateRequest): Promise<User> => {
   const { data } = await nextServer.patch<User>("/users/me", userData);
 
   return data;
 };
 
-export const checkSession = async () => {
+export const checkSession = async (): Promise<boolean> => {
   const { data } = await nextServer.get<CheckSessionRequest>("/auth/session");
 
   return data.success;
 };
 
-export const getMe = async () => {
+export const getMe = async (): Promise<User> => {
   const { data } = await nextServer.get<User>("/users/me");
 
   return data;

@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { update, UpdateRequest } from "@/lib/api/clientApi";
+import { updateMe } from "@/lib/api/clientApi";
 import Image from "next/image";
 import css from "./EditProfilePage.module.css";
 
@@ -17,29 +18,16 @@ export default function EditProfilePageClient({
   avatar,
 }: EditProfilePageProps) {
   const router = useRouter();
+  const [userName, setUserName] = useState(username);
 
-  const handleSubmit = async (formData: FormData) => {
-    try {
-      //??
-      console.log("formData: ", formData);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setUserName(event.target.value);
 
-      const formValues = Object.fromEntries(
-        formData
-      ) as unknown as UpdateRequest;
+  const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const res = await updateMe({ email, username: userName });
 
-      //??
-      console.log("formValues: ", formValues);
-      console.log("formValues.username: ", formValues.username);
-
-      const res = await update(formValues);
-
-      //??
-      console.log("res: ", res);
-
-      if (res) router.push("/profile");
-    } catch (error) {
-      console.log(error);
-    }
+    if (res) router.push("/profile");
   };
 
   const handleCancel = () => router.push("/profile");
@@ -57,7 +45,7 @@ export default function EditProfilePageClient({
           className={css.avatar}
         />
 
-        <form className={css.profileInfo} action={handleSubmit}>
+        <form className={css.profileInfo} onSubmit={handleSave}>
           <div className={css.usernameWrapper}>
             <label htmlFor="username">Username:</label>
             <input
@@ -66,6 +54,7 @@ export default function EditProfilePageClient({
               className={css.input}
               required
               defaultValue={username}
+              onChange={handleChange}
             />
           </div>
 

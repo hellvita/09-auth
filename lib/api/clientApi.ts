@@ -30,6 +30,7 @@ interface CheckSessionRequest {
 }
 
 export interface UpdateRequest {
+  email: string;
   username: string;
 }
 
@@ -47,7 +48,7 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
-export const update = async (userData: UpdateRequest) => {
+export const updateMe = async (userData: UpdateRequest) => {
   const { data } = await nextServer.patch<User>("/users/me", userData);
   return data;
 };

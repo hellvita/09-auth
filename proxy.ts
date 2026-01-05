@@ -45,27 +45,25 @@ export async function proxy(request: NextRequest) {
             cookieStore.set("refreshToken", parsed.refreshToken, options);
         }
 
-        if (isPublicRoute)
-          return NextResponse.redirect(new URL("/", request.url), {
-            headers: { Cookie: cookieStore.toString() },
-          });
-
         if (isPrivateRoute)
           return NextResponse.next({
             headers: { Cookie: cookieStore.toString() },
           });
+
+        return NextResponse.redirect(new URL("/", request.url), {
+          headers: { Cookie: cookieStore.toString() },
+        });
       }
     }
 
     if (isPublicRoute) return NextResponse.next();
 
-    if (isPrivateRoute)
-      return NextResponse.redirect(new URL("/sign-in", request.url));
+    return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
-  if (isPublicRoute) return NextResponse.redirect(new URL("/", request.url));
-
   if (isPrivateRoute) return NextResponse.next();
+
+  return NextResponse.redirect(new URL("/", request.url));
 }
 
 export const config = {

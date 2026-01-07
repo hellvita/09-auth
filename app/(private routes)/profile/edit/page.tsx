@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/store/authStore";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 import { User } from "@/types/user";
 import Loading from "@/app/loading";
@@ -11,7 +12,8 @@ import css from "./EditProfilePage.module.css";
 
 export default function EditProfilePage() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const setUser = useAuthStore((state) => state.setUser);
+  const [newUserData, setNewUserUser] = useState<User | null>(null);
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export default function EditProfilePage() {
       try {
         const data = await getMe();
 
-        setUser(data);
+        setNewUserUser(data);
         setUserName(data.username);
       } catch {
         toast("Could not load profile, please try again...");
@@ -35,11 +37,12 @@ export default function EditProfilePage() {
   const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const res = await updateMe({
-      email: user?.email ? user.email : "",
+      email: newUserData?.email ? newUserData.email : "",
       username: userName,
     });
 
     if (res) {
+      setUser(res);
       router.push("/profile");
     } else {
       toast("Could not update profile, please try again...");
@@ -48,7 +51,7 @@ export default function EditProfilePage() {
 
   const handleCancel = () => router.push("/profile");
 
-  if (!user) return <Loading />;
+  if (!newUserData) return <Loading />;
 
   return (
     <main className={css.mainContent}>
@@ -56,7 +59,7 @@ export default function EditProfilePage() {
         <h1 className={css.formTitle}>Edit Profile</h1>
 
         <Image
-          src={user.avatar}
+          src={newUserData.avatar}
           alt="User Avatar"
           width={120}
           height={120}
@@ -71,12 +74,12 @@ export default function EditProfilePage() {
               type="text"
               className={css.input}
               required
-              defaultValue={user.username}
+              defaultValue={newUserData.username}
               onChange={handleChange}
             />
           </div>
 
-          <p>Email: {user.email}</p>
+          <p>Email: {newUserData.email}</p>
 
           <div className={css.actions}>
             <button

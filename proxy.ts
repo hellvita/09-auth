@@ -46,8 +46,8 @@ export async function proxy(request: NextRequest) {
         }
 
         if (isPrivateRoute)
-          return NextResponse.next({
-            headers: { Cookie: cookieStore.toString() },
+          return NextResponse.redirect(request.nextUrl, {
+            headers: cookieArray.map((cookie) => ["Set-Cookie", cookie]),
           });
 
         return NextResponse.redirect(new URL("/", request.url), {

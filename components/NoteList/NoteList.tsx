@@ -33,7 +33,11 @@ export default function NoteList({ notes }: NoteListProps) {
     <ul className={css.list}>
       {notes.map((note) => (
         <li className={css.listItem} key={note.id}>
-          <h2 className={css.title}>{note.title}</h2>
+          <div className={css.titleContainer}>
+            <h2 className={css.title}>{note.title}</h2>
+            <button>ed</button>
+          </div>
+
           <p className={css.content}>{note.content ?? ""}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>

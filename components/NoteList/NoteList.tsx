@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { deleteNote } from "@/lib/api/clientApi";
 import toast from "react-hot-toast";
+import NoteHeader from "../NoteHeader/NoteHeader";
 import css from "./NoteList.module.css";
 
 interface NoteListProps {
@@ -33,11 +34,7 @@ export default function NoteList({ notes }: NoteListProps) {
     <ul className={css.list}>
       {notes.map((note) => (
         <li className={css.listItem} key={note.id}>
-          <div className={css.titleContainer}>
-            <h2 className={css.title}>{note.title}</h2>
-            <button>ed</button>
-          </div>
-
+          <NoteHeader title={note.title} />
           <p className={css.content}>{note.content ?? ""}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>

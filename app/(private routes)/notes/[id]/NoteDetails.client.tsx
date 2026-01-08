@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { fetchNoteById } from "@/lib/api/clientApi";
 import Loading from "@/app/loading";
+import NoteHeader from "@/components/NoteHeader/NoteHeader";
 import css from "./NoteDetails.module.css";
 
 export default function NoteDetailsClient() {
@@ -35,9 +36,11 @@ export default function NoteDetailsClient() {
     <div className={css.wrapper}>
       <div className={css.container}>
         <div className={css.item}>
-          <div className={css.header}>
-            <h2>{note.title}</h2>
-          </div>
+          <NoteHeader
+            title={note.title}
+            styles={["titlePreview"]}
+            iconSize={20}
+          />
           <p className={css.content}>{note.content}</p>
           <p className={css.date}>{formattedDate}</p>
         </div>

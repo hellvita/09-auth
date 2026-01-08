@@ -1,0 +1,13 @@
+.editIcon {
+  padding: 4px;
+  border-radius: 50%;
+  background-color: #d0d6df;
+  transition: background-color 0.2s ease, scale 0.2s ease;
+}
+
+.editIcon:hover,
+.editIcon:focus {
+  cursor: pointer;
+  scale: 1.2;
+  background-color: rgba(208, 214, 223, 0.8);
+}

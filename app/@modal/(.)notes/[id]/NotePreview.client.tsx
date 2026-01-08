@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { fetchNoteById } from "@/lib/api/clientApi";
 import Loading from "@/app/loading";
 import Modal from "@/components/Modal/Modal";
+import NoteHeader from "@/components/NoteHeader/NoteHeader";
 import css from "./NotePreview.module.css";
 
 export default function NotePreviewClient() {
@@ -45,9 +46,12 @@ export default function NotePreviewClient() {
         <div>
           <div className={css.container}>
             <div className={css.item}>
-              <div className={css.header}>
-                <h2>{note.title}</h2>
-              </div>
+              <NoteHeader
+                title={note.title}
+                styles={["titlePreview"]}
+                iconSize={20}
+              />
+
               <p className={css.content}>{note.content}</p>
               <p className={css.date}>{formattedDate}</p>
             </div>

@@ -48,8 +48,10 @@ export default function NotePreviewClient() {
             <div className={css.item}>
               <NoteHeader
                 title={note.title}
+                noteId={id}
                 styles={["titlePreview"]}
                 iconSize={20}
+                editAllowed={false}
               />
 
               <p className={css.content}>{note.content}</p>

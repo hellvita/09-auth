@@ -4,14 +4,18 @@ import css from "./NoteHeader.module.css";
 
 interface NoteHeaderProps {
   title: string;
+  noteId: string;
   styles?: string[];
   iconSize?: number;
+  editAllowed?: boolean;
 }
 
 export default function NoteHeader({
   styles,
   iconSize,
   title,
+  noteId,
+  editAllowed = true,
 }: NoteHeaderProps) {
   let filteredStyles = [""];
   if (styles) filteredStyles = styles.map((name) => css[name]).filter(Boolean);
@@ -19,7 +23,7 @@ export default function NoteHeader({
   return (
     <div className={css.titleContainer}>
       <h2 className={clsx(css.title, ...filteredStyles)}>{title}</h2>
-      <EditIcon iconSize={iconSize} />
+      {editAllowed && <EditIcon noteId={noteId} iconSize={iconSize} />}
     </div>
   );
 }

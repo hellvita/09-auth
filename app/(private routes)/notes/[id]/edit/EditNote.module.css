@@ -1,0 +1,17 @@
+.main {
+  flex: 1;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  text-align: center;
+}

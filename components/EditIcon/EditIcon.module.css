@@ -1,3 +1,8 @@
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .editIcon {
   padding: 4px;
   border-radius: 50%;
@@ -7,7 +12,6 @@
 
 .editIcon:hover,
 .editIcon:focus {
-  cursor: pointer;
   scale: 1.2;
   background-color: rgba(208, 214, 223, 0.8);
 }

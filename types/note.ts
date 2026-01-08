@@ -13,6 +13,11 @@ export interface NewNote {
   tag: NoteTag;
 }
 
+export interface UpdatedNote {
+  id: string;
+  body: { title: string; content: string; tag: NoteTag };
+}
+
 // export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 export type NoteTag = (typeof TAG_TYPES)[number];
 

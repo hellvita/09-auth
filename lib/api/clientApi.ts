@@ -1,5 +1,5 @@
 import { nextServer } from "./api";
-import { Note, NoteTag, NewNote } from "@/types/note";
+import { Note, NoteTag, NewNote, UpdatedNote } from "@/types/note";
 import { User } from "@/types/user";
 
 interface NotesHttpResponse {
@@ -29,7 +29,7 @@ interface CheckSessionRequest {
   success: boolean;
 }
 
-export interface UpdateRequest {
+interface UpdateRequest {
   email: string;
   username: string;
 }
@@ -97,6 +97,17 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 
 export const createNote = async (note: NewNote): Promise<Note> => {
   const { data } = await nextServer.post<Note>("/notes", note);
+
+  return data;
+};
+
+export const updateNoteById = async (
+  updatedNote: UpdatedNote
+): Promise<Note> => {
+  const { data } = await nextServer.patch<Note>(
+    `/notes/${updatedNote.id}`,
+    updatedNote.body
+  );
 
   return data;
 };

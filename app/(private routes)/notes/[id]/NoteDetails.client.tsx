@@ -38,6 +38,7 @@ export default function NoteDetailsClient() {
         <div className={css.item}>
           <NoteHeader
             title={note.title}
+            noteId={id}
             styles={["titlePreview"]}
             iconSize={20}
           />

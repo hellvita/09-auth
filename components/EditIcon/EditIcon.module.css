@@ -1,6 +1,13 @@
+/* for the Link element */
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+/* for the button element */
+.btn {
+  border: none;
+  background: none;
 }
 
 .editIcon {

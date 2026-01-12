@@ -51,7 +51,6 @@ export default function NotePreviewClient() {
                 noteId={id}
                 styles={["titlePreview"]}
                 iconSize={20}
-                editAllowed={false}
               />
 
               <p className={css.content}>{note.content}</p>

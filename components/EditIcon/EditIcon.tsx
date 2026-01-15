@@ -1,5 +1,3 @@
-"use client";
-
 import { CiEdit } from "react-icons/ci";
 import Link from "next/link";
 import css from "./EditIcon.module.css";
